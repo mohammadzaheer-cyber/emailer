@@ -25,6 +25,7 @@ const allowedOrigins = [
   'http://localhost:3001',
   'http://127.0.0.1:3000',
   'http://127.0.0.1:3001',
+  'https://zaheer.stacknest.in',
   // Add your production frontend URL here
 ];
 
