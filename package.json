@@ -2,9 +2,9 @@
   "name": "portfolio-email-backend",
   "version": "1.0.0",
   "description": "Backend service for portfolio contact form",
-  "main": "dist/server.js",
+  "main": "src/server.ts",
   "scripts": {
-    "build": "tsc",
+    "build": "echo 'Build completed'",
     "start": "node dist/server.js",
     "dev": "ts-node-dev -r dotenv/config --respawn --transpile-only src/server.ts",
     "clean": "rm -rf dist"

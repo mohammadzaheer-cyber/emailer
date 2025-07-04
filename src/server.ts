@@ -7,10 +7,12 @@ import { errorHandler, notFoundHandler } from './middleware';
 import { validateEmailConfig } from './config/email.config';
 import path from 'path';
 
-// Load environment variables
-const envPath = path.join(__dirname, '..', '.env');
-console.log('Loading .env from:', envPath);
-dotenv.config({ path: envPath });
+// Load environment variables for Development
+// const envPath = path.join(__dirname, '..', '.env');
+// console.log('Loading .env from:', envPath);
+// dotenv.config({ path: envPath });
+
+dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -32,13 +34,13 @@ const allowedOrigins = [
 const corsOptions = {
   origin: function (origin: string | undefined, callback: (err: Error | null, allow?: boolean) => void) {
     console.log('CORS request from origin:', origin);
-    
+
     // Allow requests with no origin (like mobile apps, Postman, or curl requests)
     if (!origin) {
       console.log('Allowing request with no origin');
       return callback(null, true);
     }
-    
+
     // Check if the origin is in the allowed list
     if (allowedOrigins.includes(origin)) {
       console.log('Origin allowed:', origin);
@@ -98,12 +100,16 @@ if (!validateEmailConfig()) {
   process.exit(1);
 }
 
-// Start server
-app.listen(PORT, () => {
-  console.log(`🚀 Server running on port ${PORT}`);
-  console.log(`📧 Email service configured for: ${process.env.PERSONAL_EMAIL}`);
-  console.log(`🌐 CORS enabled for origins:`, allowedOrigins);
-  console.log(`📝 Environment: ${process.env.NODE_ENV || 'development'}`);
-});
+// Start server for development
+// app.listen(PORT, () => {
+//   console.log(`🚀 Server running on port ${PORT}`);
+//   console.log(`📧 Email service configured for: ${process.env.PERSONAL_EMAIL}`);
+//   console.log(`🌐 CORS enabled for origins:`, allowedOrigins);
+//   console.log(`📝 Environment: ${process.env.NODE_ENV || 'development'}`);
+// });
+
+console.log(`📧 Email service configured for: ${process.env.PERSONAL_EMAIL}`);
+console.log(`🌐 CORS enabled for origins:`, allowedOrigins);
+console.log(`📝 Environment: ${process.env.NODE_ENV || 'development'}`);
 
 export default app;
